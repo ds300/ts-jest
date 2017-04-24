@@ -107,6 +107,9 @@ export function getTSConfig(globals, collectCoverage: boolean = false) {
     config.inlineSources = true;
   }
 
-  config.target = 'es2015';
+  if (config.allowSyntheticDefaultImports) {
+    // compile ts to es2015 and transform with babel afterwards
+    config.target = 'es2015';
+  }
   return tsc.convertCompilerOptionsFromJson(config, undefined).options;
 }
